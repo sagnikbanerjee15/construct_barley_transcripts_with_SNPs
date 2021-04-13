@@ -10,6 +10,7 @@ def downloadCI16151data():
     cmd += f"--output /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/ "
     cmd += f"1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.output "
     cmd += f"1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.error "
+    print(cmd)
     os.system(cmd)
 
 def alignReadsToBarleyBlumeria():
