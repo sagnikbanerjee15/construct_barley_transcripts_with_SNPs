@@ -68,6 +68,7 @@ def constructDeNovoTranscript(gene):
     cmd += " --no-chimeras "
     cmd += " -t 60 "
     cmd += " -f samse "
+    cmd += ""
     os.system(cmd)
 
 def mergeAllSamples():
@@ -111,6 +112,7 @@ HORVU.MOREX.r2.1HG0058670"""
     
     for gene in horvu_genes:
         constructDeNovoTranscript(gene)
+        sys.exit()
         
     
 if __name__ == "__main__":
