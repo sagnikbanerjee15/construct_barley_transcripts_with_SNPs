@@ -136,7 +136,6 @@ HORVU.MOREX.r2.1HG0058670"""
     
     for gene in horvu_genes:
         constructDeNovoTranscript(gene)
-        sys.exit()
         
     
 if __name__ == "__main__":
