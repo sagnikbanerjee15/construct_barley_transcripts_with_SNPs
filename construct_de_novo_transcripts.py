@@ -5,11 +5,11 @@ import os
 def downloadCI16151data():
     srr_id_filename = "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
     cmd  = f" /90daydata/maizegdb/sagnik/Finder//utils/downloadAndDumpFastqFromSRA.py "
-    cmd += f"--sra {srr_id_filename}"
-    cmd += f"--cpu 60 "
-    cmd += f"--output /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/ "
-    cmd += f"1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.output "
-    cmd += f"1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.error "
+    cmd += f"--sra {srr_id_filename} "
+    cmd += f" --cpu 60 "
+    cmd += f" --output /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/ "
+    cmd += f" 1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.output "
+    cmd += f" 2> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.error "
     print(cmd)
     os.system(cmd)
 
@@ -27,8 +27,8 @@ def alignReadsToBarleyBlumeria():
         cmd += " --genomeLoad LoadAndKeep "
         cmd += " --outSAMtype BAM SortedByCoordinate "
         cmd += " --outFileNamePrefix /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_ "
-        cmd += " > /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+".output "
-        cmd += " > /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+".error "
+        cmd += " 1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+".output "
+        cmd += " 2> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+".error "
         if os.path.exists("/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+"_Aligned.sortedByCoord.bam"):
             os.system(cmd)
         
