@@ -29,7 +29,7 @@ def alignReadsToBarley():
         cmd += " --outFileNamePrefix /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_ "
         cmd += " 1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+".output "
         cmd += " 2> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+".error "
-        if os.path.exists("/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_Aligned.sortedByCoord.bam"):
+        if os.path.exists("/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_Aligned.sortedByCoord.bam")==False:
             print(cmd)
             os.system(cmd)
         
@@ -38,7 +38,7 @@ def constructDeNovoTranscript(gene):
     gff3_filename = "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/Barley_Morex_V2_gene_annotation_PGSB.all.gff3"
 
 def mergeAllSamples():
-    srr_id_filename = "/work/LAS/rpwise-lab/sagnik/RNA-Seq_90_sample/data/raw_data/list_of_ids"
+    srr_id_filename = "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
     srr_ids = open(srr_id_filename,"r").read().split("\n")[:-1]
     cmd = "samtools merge -@ 60 "
     for srr_id in srr_ids:
