@@ -24,7 +24,8 @@ def alignReadsToBarleyBlumeria():
         cmd += " --limitBAMsortRAM 107374182400 "
         cmd += " --outSAMattributes NH HI AS nM NM MD jM jI XS "
         cmd += " --genomeLoad LoadAndKeep "
-        cmd += " --outFileNamePrefix /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data//STAR_alignments/"+srr_id+"_ "
+        cmd += " --outSAMtype BAM SortedByCoordinate "
+        cmd += " --outFileNamePrefix /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_ "
         cmd += " > /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+".output "
         cmd += " > /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+".error "
         if os.path.exists("/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+"_Aligned.sortedByCoord.bam"):
