@@ -40,7 +40,7 @@ def mergeAllSamples():
     srr_ids = open(srr_id_filename,"r").read().split("\n")[:-1]
     cmd = "samtools merge -@ 60 "
     for srr_id in srr_ids:
-        cmd += ""
+        cmd += "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+"_Aligned.sortedByCoord.bam "
     os.system(cmd)
     
 
