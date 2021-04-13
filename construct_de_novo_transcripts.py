@@ -5,9 +5,9 @@ import os
 def downloadCI16151data():
     srr_id_filename = "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
     cmd  = f" /90daydata/maizegdb/sagnik/Finder//utils/downloadAndDumpFastqFromSRA.py "
-    cmd += f"-s {srr_id_filename}"
-    cmd += f"-n 60 "
-    cmd += f"-o /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/ "
+    cmd += f"--sra {srr_id_filename}"
+    cmd += f"--cpu 60 "
+    cmd += f"--output /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/ "
     cmd += f"1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.output "
     cmd += f"1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.error "
     os.system(cmd)
