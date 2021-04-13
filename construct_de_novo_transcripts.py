@@ -10,10 +10,10 @@ def downloadCI16151data():
     cmd += f" --output /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/ "
     cmd += f" 1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.output "
     cmd += f" 2> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.error "
-    print(cmd)
+    #print(cmd)
     os.system(cmd)
 
-def alignReadsToBarleyBlumeria():
+def alignReadsToBarley():
     srr_id_filename = "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
     srr_ids = open(srr_id_filename,"r").read().split("\n")[:-1]
     for srr_id in srr_ids:
@@ -27,9 +27,10 @@ def alignReadsToBarleyBlumeria():
         cmd += " --genomeLoad LoadAndKeep "
         cmd += " --outSAMtype BAM SortedByCoordinate "
         cmd += " --outFileNamePrefix /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_ "
-        cmd += " 1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+".output "
-        cmd += " 2> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+".error "
-        if os.path.exists("/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+"_Aligned.sortedByCoord.bam"):
+        cmd += " 1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+".output "
+        cmd += " 2> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+".error "
+        if os.path.exists("/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_Aligned.sortedByCoord.bam"):
+            print(cmd)
             os.system(cmd)
         
 
@@ -71,7 +72,7 @@ HORVU.MOREX.r2.1HG0058670"""
     
     downloadCI16151data()
     
-    alignReadsToBarleyBlumeria()
+    alignReadsToBarley()
     
     mergeAllSamples()
     
