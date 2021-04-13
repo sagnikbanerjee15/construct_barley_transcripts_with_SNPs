@@ -13,7 +13,7 @@ def downloadCI16151data():
     os.system(cmd)
 
 def alignReadsToBarleyBlumeria():
-    srr_id_filename = "/work/LAS/rpwise-lab/sagnik/RNA-Seq_90_sample/data/raw_data/list_of_ids"
+    srr_id_filename = "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
     srr_ids = open(srr_id_filename,"r").read().split("\n")[:-1]
     for srr_id in srr_ids:
         cmd  = "STAR "
