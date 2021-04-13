@@ -56,7 +56,7 @@ def constructDeNovoTranscript(gene):
         os.system(cmd)
     
     # Align the long contigs to barley genome using gmap
-    cmd  = "gmapl "
+    """cmd  = "gmapl "
     cmd += " -D /90daydata/maizegdb/sagnik/data/finder/Hordeum_vulgare/genome/ "
     cmd += " -d gmap_index "
     cmd += " --min-intronlength=20 "
@@ -69,6 +69,23 @@ def constructDeNovoTranscript(gene):
     cmd += f" > /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_gmap_aligned.sam "
     if os.path.exists(f"/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_gmap_aligned.sam")==False:
         os.system(cmd)
+    """
+    
+    cmd  = "STARlong "
+    cmd += " --runThreadN 60 "
+    cmd += " --genomeDir /90daydata/maizegdb/sagnik/data/finder/Hordeum_vulgare/genome/star_index "
+    cmd += f" --readFilesIn /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}/transcripts.fasta "
+    cmd += " --alignIntronMin 20  --alignIntronMax 10000 "
+    cmd += " --limitBAMsortRAM 107374182400 "
+    cmd += " --outSAMattributes NH HI AS nM NM MD jM jI XS "
+    cmd += " --genomeLoad LoadAndKeep "
+    cmd += " --outSAMtype BAM SortedByCoordinate "
+    cmd += f" --outFileNamePrefix /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_ "
+    cmd += f" 1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}.output "
+    cmd += f" 2> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}.error " 
+    if os.path.exists(f"/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_Aligned.sortedByCoord.out.bam")==False:
+        os.system(cmd)
+        
 
 def mergeAllSamples():
     srr_id_filename = "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
