@@ -10,7 +10,6 @@ def downloadCI16151data():
     cmd += f" --output /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/ "
     cmd += f" 1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.output "
     cmd += f" 2> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.error "
-    #print(cmd)
     os.system(cmd)
 
 def alignReadsToBarley():
@@ -29,8 +28,7 @@ def alignReadsToBarley():
         cmd += " --outFileNamePrefix /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_ "
         cmd += " 1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+".output "
         cmd += " 2> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+".error "
-        if os.path.exists("/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_Aligned.sortedByCoord.bam")==False:
-            print(cmd)
+        if os.path.exists("/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_Aligned.sortedByCoord.out.bam")==False:
             os.system(cmd)
         
 
@@ -38,13 +36,46 @@ def constructDeNovoTranscript(gene):
     gff3_filename = "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/Barley_Morex_V2_gene_annotation_PGSB.all.gff3"
     cmd = f"cat {gff3_filename} |grep {gene}|grep gene > /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/{gene}_loc"
     os.system(cmd)
+    line = open(f"/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/{gene}_loc","r").read().strip()
+    line = line.strip()
+    chromosome = line[0]
+    start = line[3]
+    end = line[4]
+    
+    # Retrieve region from merged bam file
+    cmd  = f"samtools view -@ 60 /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged.bam {chromosome}:{start}-{end}"
+    cmd += "|awk '{print \"@\"$1\"\\n\"$10\"\\n+\\n\"$11}' "
+    cmd += f"> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
+    os.system(cmd)
+    
+    # Assemble using Trinity
+    cmd  = "Trinity "
+    cmd += " --seqType fq "
+    cmd += " --max_memory 50G "
+    cmd += f" --single /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
+    cmd += " --CPU 60 "
+    cmd += f" --output /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity "
+    cmd += " --full_cleanup "
+    os.system(cmd)
+    
+    # Align the long contigs to barley genome using gmap
+    cmd  = "gmap "
+    cmd += " -D "
+    cmd += " -d gmap_index "
+    cmd += " --min-intronlength=20 "
+    cmd += " --max-intronlength-middle=10000 "
+    cmd += " --max-intronlength-ends=10000 "
+    cmd += " --no-chimeras "
+    cmd += " -t 60 "
+    cmd += " -f samse "
+    os.system(cmd)
 
 def mergeAllSamples():
     srr_id_filename = "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
     srr_ids = open(srr_id_filename,"r").read().split("\n")[:-1]
-    cmd = "samtools merge -@ 60 "
+    cmd = "samtools merge -@ 60 /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged.bam " 
     for srr_id in srr_ids:
-        cmd += "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+"_Aligned.sortedByCoord.bam "
+        cmd += "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_Aligned.sortedByCoord.out.bam "
     os.system(cmd)
     
 
@@ -80,6 +111,7 @@ HORVU.MOREX.r2.1HG0058670"""
     
     for gene in horvu_genes:
         constructDeNovoTranscript(gene)
+        
     
 if __name__ == "__main__":
     main()
