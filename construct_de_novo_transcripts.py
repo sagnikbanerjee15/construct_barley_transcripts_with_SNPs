@@ -48,14 +48,10 @@ def constructDeNovoTranscript(gene):
     cmd += f"> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
     os.system(cmd)
     
-    # Assemble using Trinity
-    cmd  = "Trinity "
-    cmd += " --seqType fq "
-    cmd += " --max_memory 50G "
-    cmd += f" --single /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
-    cmd += " --CPU 60 "
-    cmd += f" --output /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity "
-    cmd += " --full_cleanup "
+    cmd = "spades.py --rna "
+    cmd += " -s /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq " 
+    cmd += " -t 60 "
+    cmd += f" -o /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene} "
     os.system(cmd)
     
     # Align the long contigs to barley genome using gmap
