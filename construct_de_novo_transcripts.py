@@ -37,7 +37,7 @@ def constructDeNovoTranscript(gene):
     cmd = f"cat {gff3_filename} |grep {gene}|grep gene > /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/{gene}_loc"
     os.system(cmd)
     line = open(f"/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/{gene}_loc","r").read().strip()
-    line = line.strip()
+    line = line.strip().split("\t")
     chromosome = line[0]
     start = line[3]
     end = line[4]
