@@ -74,7 +74,11 @@ def mergeAllSamples():
     cmd = "samtools merge -@ 60 /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged.bam " 
     for srr_id in srr_ids:
         cmd += "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_Aligned.sortedByCoord.out.bam "
-    os.system(cmd)
+    if os.path.exists("/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged.bam")==False:
+        os.system(cmd)
+    cmd="samtools index /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged.bam "
+    if os.path.exists("/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged.bam.bai")==False:
+        os.system(cmd)
     
 
 def main():
