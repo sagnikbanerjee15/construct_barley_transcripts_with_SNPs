@@ -36,6 +36,8 @@ def alignReadsToBarley():
 
 def constructDeNovoTranscript(gene):
     gff3_filename = "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/Barley_Morex_V2_gene_annotation_PGSB.all.gff3"
+    cmd = f"cat {gff3_filename} |grep {gene}|grep gene > /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/{gene}_loc"
+    os.system(cmd)
 
 def mergeAllSamples():
     srr_id_filename = "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
