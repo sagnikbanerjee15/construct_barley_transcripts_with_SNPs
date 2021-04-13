@@ -57,7 +57,7 @@ def constructDeNovoTranscript(gene):
     
     # Align the long contigs to barley genome using gmap
     cmd  = "gmap "
-    cmd += " -D "
+    cmd += " -D /90daydata/maizegdb/sagnik/data/finder/Hordeum_vulgare/genome/ "
     cmd += " -d gmap_index "
     cmd += " --min-intronlength=20 "
     cmd += " --max-intronlength-middle=10000 "
