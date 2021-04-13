@@ -85,6 +85,10 @@ def constructDeNovoTranscript(gene):
     cmd += f" 2> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}.error " 
     if os.path.exists(f"/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_Aligned.sortedByCoord.out.bam")==False:
         os.system(cmd)
+    
+    if os.path.exists(f"/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_Aligned.sortedByCoord.out.bam.csi")==False:
+        cmd = f"samtools index -c /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_Aligned.sortedByCoord.out.bam"
+        os.system(cmd)
         
 
 def mergeAllSamples():
