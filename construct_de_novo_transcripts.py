@@ -49,7 +49,7 @@ def constructDeNovoTranscript(gene):
     os.system(cmd)
     
     cmd = "spades.py --rna "
-    cmd += " -s /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq " 
+    cmd += f" -s /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq " 
     cmd += " -t 60 "
     cmd += f" -o /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene} "
     print(cmd)
