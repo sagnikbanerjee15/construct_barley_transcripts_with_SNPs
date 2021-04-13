@@ -6,7 +6,7 @@ def downloadCI16151data():
     srr_id_filename = "/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
     cmd  = f" /90daydata/maizegdb/sagnik/Finder//utils/downloadAndDumpFastqFromSRA.py "
     cmd += f"-s {srr_id_filename}"
-    cmd += f"-n 32"
+    cmd += f"-n 60 "
     cmd += f"-o /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/ "
     cmd += f"1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.output "
     cmd += f"1> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/download.error "
@@ -17,7 +17,7 @@ def alignReadsToBarleyBlumeria():
     srr_ids = open(srr_id_filename,"r").read().split("\n")[:-1]
     for srr_id in srr_ids:
         cmd  = "STAR "
-        cmd += " --runThreadN 32 "
+        cmd += " --runThreadN 60 "
         cmd += " --genomeDir /90daydata/maizegdb/sagnik/data/finder/Hordeum_vulgare/genome/star_index "
         cmd += " --readFilesIn /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/"+srr_id+".fastq "
         cmd += " --alignIntronMin 20  --alignIntronMax 10000 "
