@@ -52,7 +52,7 @@ def constructDeNovoTranscript(gene):
     cmd += f" -s /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq " 
     cmd += " -t 60 "
     cmd += f" -o /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene} "
-    if os.path.exists("/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}/transripts.fasta")==False:
+    if os.path.exists(f"/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}/transripts.fasta")==False:
         os.system(cmd)
     
     # Align the long contigs to barley genome using gmap
@@ -67,7 +67,7 @@ def constructDeNovoTranscript(gene):
     cmd += " -f samse "
     cmd += f" /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}/transripts.fasta "
     cmd += f" > /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_gmap_aligned.sam "
-    if os.path.exists("/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_gmap_aligned.sam")==False:
+    if os.path.exists(f"/90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_gmap_aligned.sam")==False:
         os.system(cmd)
 
 def mergeAllSamples():
