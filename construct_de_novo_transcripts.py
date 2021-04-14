@@ -145,7 +145,7 @@ HORVU.MOREX.r2.1HG0058670"""
     
     cmd = "samtools merge -@ 60 /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/merged_from_18_samples.bam  "
     for gene in horvu_genes:
-        cmd += f"> /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
+        cmd += f" /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
     os.system(cmd)
     cmd="samtools index -c -@ 60 /90daydata/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/merged_from_18_samples.bam"
     os.system(cmd)
