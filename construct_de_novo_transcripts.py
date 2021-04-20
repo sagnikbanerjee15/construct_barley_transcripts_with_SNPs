@@ -73,13 +73,12 @@ def constructDeNovoTranscript(gene):
     
     cmd  = f" Trinity "
     cmd += f" --seqType fq "
-    cmd += f" --single /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}/transcripts.fasta "
+    cmd += f" --single /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
     cmd += f" --CPU 40 "
     cmd += f" --KMER_SIZE 32 "
     cmd += f" --max_memory 45G "
     cmd += f" --output /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity "
     cmd += f" --full_cleanup "
-    
     cmd += f"1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity.output "
     cmd += f"2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity.error "
     os.system(cmd)
