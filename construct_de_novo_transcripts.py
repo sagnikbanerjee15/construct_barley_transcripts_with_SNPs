@@ -82,6 +82,7 @@ def constructDeNovoTranscript(gene):
     
     cmd += f"1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity.output "
     cmd += f"2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity.error "
+    os.system(cmd)
     
     cmd  = "STARlong "
     cmd += " --runThreadN 60 "
