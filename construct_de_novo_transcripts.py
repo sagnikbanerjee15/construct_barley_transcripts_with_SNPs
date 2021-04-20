@@ -108,7 +108,7 @@ q1=/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignmen
     cmd += f" -o /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_soapdenovo "
     cmd += f" -K 127 "
     cmd += f" -p 40 "
-    cmd += f" -s /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_soapdenovo.configuration_file"
+    cmd += f" -s /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_soapdenovo.configuration_file "
     cmd += f" 1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_soapdenovo.output "
     cmd += f" 2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_soapdenovo.error "
     os.system(cmd)
