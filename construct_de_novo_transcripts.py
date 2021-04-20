@@ -48,14 +48,15 @@ def constructDeNovoTranscript(gene):
     cmd += f"> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
     print(cmd)
     os.system(cmd)
-    """
+    
     cmd = "spades.py --rna "
     cmd += f" -s /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq " 
     cmd += " -t 60 "
+    cmd += " -k 127 "
     cmd += f" -o /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene} "
     if os.path.exists(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}/transcripts.fasta")==False:
         os.system(cmd)
-    """
+    
     # Align the long contigs to barley genome using gmap
     """cmd  = "gmapl "
     cmd += " -D /project/maizegdb/sagnik/data/finder/Hordeum_vulgare/genome/ "
@@ -71,7 +72,7 @@ def constructDeNovoTranscript(gene):
     if os.path.exists(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_gmap_aligned.sam")==False:
         os.system(cmd)
     """
-    
+    """
     cmd  = f" Trinity "
     cmd += f" --seqType fq "
     cmd += f" --single /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
@@ -83,7 +84,7 @@ def constructDeNovoTranscript(gene):
     cmd += f"1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity.output "
     cmd += f"2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity.error "
     os.system(cmd)
-    
+    """
     cmd  = "STARlong "
     cmd += " --runThreadN 60 "
     cmd += " --genomeDir /project/maizegdb/sagnik/data/finder/Hordeum_vulgare/genome/star_index "
