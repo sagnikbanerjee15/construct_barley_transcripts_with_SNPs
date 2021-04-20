@@ -99,8 +99,7 @@ asm_flags=3
 #minimum aligned length to contigs for a reliable read location (at least 32 for short insert size)
 map_len=32
 #fastq file for read 1 
-q1=/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq
-    """)
+q1=/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq""")
     fhw.close()
     
     cmd  = f" SOAPdenovo-Trans-127mer "
