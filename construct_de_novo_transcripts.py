@@ -44,7 +44,7 @@ def constructDeNovoTranscript(gene):
     
     # Retrieve region from merged bam file
     cmd  = f"samtools view -@ 60 /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged.bam {chromosome}:{start}-{end}"
-    cmd += "|awk '{print \"@\"$1\"\\n\"$10\"\\n+\\n\"$11}' "
+    cmd += "|awk '{print \"@\"$1\"\"/1\"\\n\"$10\"\\n+\\n\"$11}' "
     cmd += f"> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
     print(cmd)
     os.system(cmd)
