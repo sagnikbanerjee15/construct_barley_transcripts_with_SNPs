@@ -4,7 +4,7 @@ import os
 
 def downloadCI16151data():
     srr_id_filename = "/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
-    cmd  = f" /project/maizegdb/sagnik/Finder//utils/downloadAndDumpFastqFromSRA.py "
+    cmd  = f" /project/maizegdb/sagnik/FINDER/Finder//utils/downloadAndDumpFastqFromSRA.py "
     cmd += f"--sra {srr_id_filename} "
     cmd += f" --cpu 60 "
     cmd += f" --output /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/ "
