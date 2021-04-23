@@ -16,6 +16,8 @@ def alignReadsToBarley():
     srr_id_filename = "/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
     srr_ids = open(srr_id_filename,"r").read().split("\n")[:-1]
     for srr_id in srr_ids:
+        print(srr_id)
+        sys.stdout.flush()
         cmd  = "STAR "
         cmd += " --runThreadN 60 "
         cmd += " --genomeDir /project/maizegdb/sagnik/data/finder/Hordeum_vulgare/genome/star_index "
@@ -175,7 +177,7 @@ HORVU.MOREX.r2.1HG0058670"""
     downloadCI16151data()
     
     alignReadsToBarley()
-    
+    return
     mergeAllSamples()
     
     for gene in horvu_genes:
