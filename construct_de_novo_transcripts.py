@@ -29,6 +29,7 @@ def alignReadsToBarley():
         cmd += " 1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+".output "
         cmd += " 2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+".error "
         print(cmd)
+        sys.stdout.flush()
         """if os.path.exists("/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_Aligned.sortedByCoord.out.bam")==False:
             os.system(cmd)"""
         
