@@ -183,7 +183,7 @@ HORVU.MOREX.r2.1HG0058670"""
     # Merge all alignments
     cmd="samtools merge -@ 60 /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/final.bam "
     for gene in horvu_genes:
-        cmd+= f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_Aligned.sortedByCoord.out.bam "
+        cmd+= f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_Aligned.sortedByCoord.out.bam "
     os.system(cmd)
     """
     cmd = "samtools merge -@ 60 /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/merged_from_90_samples.bam  "
