@@ -137,13 +137,13 @@ q=/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignment
 def mergeAllSamples():
     srr_id_filename = "/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
     srr_ids = open(srr_id_filename,"r").read().split("\n")[:-1]
-    cmd = "samtools merge -@ 60 /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged.bam " 
+    cmd = "samtools merge -@ 60 /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/merged.bam " 
     for srr_id in srr_ids:
         cmd += "/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_Aligned.sortedByCoord.out.bam "
-    if os.path.exists("/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged.bam")==False:
+    if os.path.exists("/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/merged.bam")==False:
         os.system(cmd)
-    cmd="samtools index -c /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged.bam "
-    if os.path.exists("/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged.bam.csi")==False:
+    cmd="samtools index -c /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/merged.bam "
+    if os.path.exists("/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/merged.bam.csi")==False:
         os.system(cmd)
     
 
