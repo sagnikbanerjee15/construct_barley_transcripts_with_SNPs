@@ -112,6 +112,7 @@ q=/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignment
     cmd += f" -s /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_soapdenovo.configuration_file "
     cmd += f" 1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_soapdenovo.output "
     cmd += f" 2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_soapdenovo.error "
+    print(cmd)
     os.system(cmd)
     
     cmd  = "STARlong "
