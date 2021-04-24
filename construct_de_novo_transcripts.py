@@ -126,12 +126,12 @@ q=/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignment
     cmd += f" --outFileNamePrefix /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_ "
     cmd += f" 1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}.output "
     cmd += f" 2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}.error " 
-    if os.path.exists(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_Aligned.sortedByCoord.out.bam")==False:
-        os.system(cmd)
+    #if os.path.exists(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_Aligned.sortedByCoord.out.bam")==False:
+    os.system(cmd)
     
-    if os.path.exists(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_Aligned.sortedByCoord.out.bam.csi")==False:
-        cmd = f"samtools index -c /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_Aligned.sortedByCoord.out.bam"
-        os.system(cmd)
+    #if os.path.exists(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_Aligned.sortedByCoord.out.bam.csi")==False:
+    cmd = f"samtools index -c /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_Aligned.sortedByCoord.out.bam"
+    os.system(cmd)
         
 
 def mergeAllSamples():
