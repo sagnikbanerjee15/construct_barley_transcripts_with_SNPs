@@ -45,9 +45,9 @@ def constructDeNovoTranscript(gene):
     end = line[4]
     
     # Retrieve region from merged bam file
-    cmd  = f"samtools view -@ 60 /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged.bam {chromosome}:{start}-{end}"
+    cmd  = f"samtools view -@ 60 /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/merged.bam {chromosome}:{start}-{end}"
     cmd += "|awk '{print \"@\"$1\"/1\"\"\\n\"$10\"\\n+\\n\"$11}' "
-    cmd += f"> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
+    cmd += f"> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/merged_{gene}.fastq "
     os.system(cmd)
     """
     cmd = "spades.py --rna "
@@ -86,7 +86,7 @@ def constructDeNovoTranscript(gene):
     cmd += f"2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity.error "
     os.system(cmd)
     """
-    fhw=open(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_soapdenovo.configuration_file","w")
+    fhw=open(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_soapdenovo.configuration_file","w")
     fhw.write(f"""#maximal read length
 max_rd_len=151
 [LIB]
@@ -106,31 +106,31 @@ q=/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignment
     
     cmd  = f" SOAPdenovo-Trans-127mer "
     cmd += f" all "
-    cmd += f" -o /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_soapdenovo "
+    cmd += f" -o /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_soapdenovo "
     cmd += f" -K 127 "
     cmd += f" -p 40 "
-    cmd += f" -s /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_soapdenovo.configuration_file "
-    cmd += f" 1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_soapdenovo.output "
-    cmd += f" 2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_soapdenovo.error "
+    cmd += f" -s /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_soapdenovo.configuration_file "
+    cmd += f" 1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_soapdenovo.output "
+    cmd += f" 2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_soapdenovo.error "
     os.system(cmd)
     
     cmd  = "STARlong "
     cmd += " --runThreadN 60 "
     cmd += " --genomeDir /project/maizegdb/sagnik/data/finder/Hordeum_vulgare/genome/star_index "
-    cmd += f" --readFilesIn /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}/transcripts.fasta "
+    cmd += f" --readFilesIn /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}/transcripts.fasta "
     cmd += " --alignIntronMin 20  --alignIntronMax 10000 "
     cmd += " --limitBAMsortRAM 107374182400 "
     cmd += " --outSAMattributes NH HI AS nM NM MD jM jI XS "
     cmd += " --genomeLoad LoadAndKeep "
     cmd += " --outSAMtype BAM SortedByCoordinate "
-    cmd += f" --outFileNamePrefix /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_ "
-    cmd += f" 1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}.output "
-    cmd += f" 2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}.error " 
-    if os.path.exists(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_Aligned.sortedByCoord.out.bam")==False:
+    cmd += f" --outFileNamePrefix /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_ "
+    cmd += f" 1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}.output "
+    cmd += f" 2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}.error " 
+    if os.path.exists(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_Aligned.sortedByCoord.out.bam")==False:
         os.system(cmd)
     
-    if os.path.exists(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_Aligned.sortedByCoord.out.bam.csi")==False:
-        cmd = f"samtools index -c /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_Aligned.sortedByCoord.out.bam"
+    if os.path.exists(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_Aligned.sortedByCoord.out.bam.csi")==False:
+        cmd = f"samtools index -c /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_Aligned.sortedByCoord.out.bam"
         os.system(cmd)
         
 
@@ -185,14 +185,14 @@ HORVU.MOREX.r2.1HG0058670"""
     for gene in horvu_genes:
         cmd+= f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_Aligned.sortedByCoord.out.bam "
     os.system(cmd)
-    
-    cmd = "samtools merge -@ 60 /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/merged_from_18_samples.bam  "
+    """
+    cmd = "samtools merge -@ 60 /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/merged_from_90_samples.bam  "
     for gene in horvu_genes:
         cmd += f" /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
     os.system(cmd)
     cmd="samtools index -c -@ 60 /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/merged_from_18_samples.bam"
     os.system(cmd)
-    
+    """
     cmd=" samtools index -c -@ 60 /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/final.bam "
     os.system(cmd)
         
