@@ -30,6 +30,8 @@ def alignReadsToBarley():
         cmd += " 2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+".error "
         if os.path.exists("/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/"+srr_id+"_Aligned.sortedByCoord.out.bam")==False:
             os.system(cmd)
+            
+        os.system(f"samtools index -c /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/{srr_id}_Aligned.sortedByCoord.out.bam")
         
 
 def constructDeNovoTranscript(gene):
