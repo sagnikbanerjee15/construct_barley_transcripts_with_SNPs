@@ -82,7 +82,8 @@ def constructDeNovoTranscript(gene):
     cmd += f" --full_cleanup "
     cmd += f"1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_trinity.output "
     cmd += f"2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_trinity.error "
-    os.system(cmd)
+    if os.path.exists(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_trinity.Trinity.fasta")==False:
+        os.system(cmd)
     
     fhw=open(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_soapdenovo.configuration_file","w")
     fhw.write(f"""#maximal read length
@@ -117,7 +118,8 @@ q=/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignment
     cmd  = "STARlong "
     cmd += " --runThreadN 60 "
     cmd += " --genomeDir /project/maizegdb/sagnik/data/finder/Hordeum_vulgare/genome/star_index "
-    cmd += f" --readFilesIn /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}/transcripts.fasta "
+    #cmd += f" --readFilesIn /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}/transcripts.fasta "
+    cmd += f" --readFilesIn /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_trinity.Trinity.fasta"
     cmd += " --alignIntronMin 20  --alignIntronMax 10000 "
     cmd += " --limitBAMsortRAM 107374182400 "
     cmd += " --outSAMattributes NH HI AS nM NM MD jM jI XS "
