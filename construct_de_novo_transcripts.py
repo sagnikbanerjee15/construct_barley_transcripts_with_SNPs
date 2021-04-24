@@ -16,8 +16,6 @@ def alignReadsToBarley():
     srr_id_filename = "/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/raw_data/list_of_ids"
     srr_ids = open(srr_id_filename,"r").read().split("\n")[:-1]
     for srr_id in srr_ids:
-        print(srr_id)
-        sys.stdout.flush()
         cmd  = "STAR "
         cmd += " --runThreadN 60 "
         cmd += " --genomeDir /project/maizegdb/sagnik/data/finder/Hordeum_vulgare/genome/star_index "
@@ -101,7 +99,8 @@ asm_flags=3
 #minimum aligned length to contigs for a reliable read location (at least 32 for short insert size)
 map_len=32
 #fastq file for read 1 
-q=/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq""")
+q=/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/merged_{gene}.fastq
+""")
     fhw.close()
     
     cmd  = f" SOAPdenovo-Trans-127mer "
