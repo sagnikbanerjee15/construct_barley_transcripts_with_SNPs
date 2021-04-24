@@ -71,19 +71,19 @@ def constructDeNovoTranscript(gene):
     if os.path.exists(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_gmap_aligned.sam")==False:
         os.system(cmd)
     """
-    """
+    
     cmd  = f" Trinity "
     cmd += f" --seqType fq "
-    cmd += f" --single /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/CI16151_merged_{gene}.fastq "
+    cmd += f" --single /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/merged_{gene}.fastq "
     cmd += f" --CPU 40 "
     cmd += f" --KMER_SIZE 32 "
     cmd += f" --max_memory 45G "
-    cmd += f" --output /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity "
+    cmd += f" --output /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_trinity "
     cmd += f" --full_cleanup "
-    cmd += f"1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity.output "
-    cmd += f"2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/CI16151_merged_{gene}_trinity.error "
+    cmd += f"1> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_trinity.output "
+    cmd += f"2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_trinity.error "
     os.system(cmd)
-    """
+    
     fhw=open(f"/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_soapdenovo.configuration_file","w")
     fhw.write(f"""#maximal read length
 max_rd_len=151
@@ -102,7 +102,7 @@ map_len=32
 q=/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignments/merged_{gene}.fastq
 """)
     fhw.close()
-    
+    """
     cmd  = f" SOAPdenovo-Trans-127mer "
     cmd += f" all "
     cmd += f" -o /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_soapdenovo "
@@ -113,7 +113,7 @@ q=/project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/STAR_alignment
     cmd += f" 2> /project/maizegdb/sagnik/construct_barley_transcripts_with_SNPs/contigs/merged_{gene}_soapdenovo.error "
     print(cmd)
     os.system(cmd)
-    
+    """
     cmd  = "STARlong "
     cmd += " --runThreadN 60 "
     cmd += " --genomeDir /project/maizegdb/sagnik/data/finder/Hordeum_vulgare/genome/star_index "
